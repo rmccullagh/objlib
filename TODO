@@ -1,0 +1,43 @@
+## TODO
+
+Macros:
+- DBL_DIG
+	- Determine how this macro is used, wrap the macro in a portable manner
+- COMO_OBJECT_API
+	- Determine the proper way to expose the API as a shared library
+- Macros for a printf formatter for como_size_t
+
+printf
+	- Determine the most portable way of printing longs and doubles
+
+malloc:
+	- wrap malloc in a failsafe way
+
+core:
+	- implement to_string for all object types
+	- implement array
+		- default size of 8
+	- implement map
+		- default size of 8
+		- with a como_object as keys allowing only strings or numbers
+		- value can be any como_object
+		- determine best hashing algorithm
+		string:
+			- add a hash value to the como_string struct
+	- define a universal size to use for all lengths. ssize_t 
+	- overflow checking
+	- equals method on objects
+	- consolodation of all include files. one global como.h include file that has all objects
+	- implement mutable bytearray
+	-map:
+			implement tostring on map with a full representation of the map objects
+			for each key append to a como_buffer object
+					- then call como_stringfrombuffer();
+							and return
+
+maybe:
+	add a binary_ops struct to the como_type struct
+		- with this, binary_ops would have a set of arthimetic function pointers
+	sequence struct 
+
+
