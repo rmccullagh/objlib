@@ -4,8 +4,8 @@
 #include "comoobject.h"
 
 typedef struct _como_long {
-	como_object base;
-	long value;
+  como_object base;
+  long value;
 } como_long;
 
 COMO_OBJECT_API como_object *como_longfromlong(long lval);

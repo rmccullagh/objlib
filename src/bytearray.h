@@ -4,10 +4,10 @@
 #include "comoobject.h"
 
 typedef struct _como_bytearray {
- 	como_object   base;
- 	como_size_t   size;
- 	como_size_t	  capacity;
- 	unsigned char *data;
+  como_object   base;
+  como_size_t   size;
+  como_size_t   capacity;
+  unsigned char *data;
  } como_bytearray;
 
  extern como_type como_bytearray_type;

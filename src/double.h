@@ -5,8 +5,8 @@
 
 
 typedef struct _como_double {
-	como_object base;
-	double value;
+  como_object base;
+  double value;
 } como_double;
 
 extern como_type como_double_type;

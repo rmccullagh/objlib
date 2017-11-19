@@ -16,6 +16,8 @@ malloc:
 core:
 	- implement to_string for all object types
 	- implement array
+        - map:
+            get_bucket
 		- default size of 8
 	- implement map
 		- default size of 8

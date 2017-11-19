@@ -10,7 +10,7 @@ COMO_OBJECT_LIB_OBJECTS =$(SOURCES:.c=)
 all: $(COMO_OBJECT_LIB_OBJECTS)
 
 .c:
-	$(CC) $(CFLAGS) $< -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $< -o bin/$@ $(LIBS)
 
 clean:
-	rm -rf $(COMO_OBJECT_LIB_OBJECTS)
+	rm -rf bin/*
