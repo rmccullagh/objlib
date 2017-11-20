@@ -13,7 +13,7 @@
     && !como_type_is(key, como_long_type))) 
 
 #define maybe_resize(o) do { \
-  como_object *map = (como_map *)(o); \
+  como_map *map = (como_map *)(o); \
   if(map->size >= map->capacity) \
     do_resize(map); \
 } while(0)
@@ -39,6 +39,7 @@ COMO_OBJECT_API como_object *como_map_new(como_size_t size)
 static void do_resize(como_map *map)
 {
   /* FUCK */
+  (void)map;
 }
 
 COMO_OBJECT_API como_object *como_map_put(como_object *obj, 
