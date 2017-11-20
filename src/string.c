@@ -59,12 +59,12 @@ static como_size_t string_hash(como_object *obj)
 }
 
 como_type como_string_type = {
-  "string",
-  string_print,
-  string_dtor,
-  string_equals,
-  string_hash,
-  NULL
+  .obj_name   = "string",
+  .obj_print  = string_print,
+  .obj_dtor   = string_dtor,
+  .obj_equals = string_equals,
+  .obj_hash   = string_hash,
+  .obj_str    = NULL
 };
 
 

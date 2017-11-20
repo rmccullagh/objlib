@@ -46,7 +46,7 @@ static int double_equals(como_object *a, como_object *b)
 }
 
 como_type como_double_type = {
-  .name       = "double",
+  .obj_name   = "double",
   .obj_print  = double_print,
   .obj_dtor   = double_dtor,
   .obj_equals = double_equals,

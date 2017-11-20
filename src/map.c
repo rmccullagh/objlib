@@ -171,12 +171,12 @@ static void map_dtor(como_object *ob)
 }
 
 como_type como_map_type = {
-  "map",
-  NULL,
-  map_dtor,
-  NULL,
-  NULL,
-  NULL
+  .obj_name   = "map",
+  .obj_print  = NULL,
+  .obj_dtor   = map_dtor,
+  .obj_equals = NULL,
+  .obj_hash   = NULL,
+  .obj_str    = NULL
 };
 
 

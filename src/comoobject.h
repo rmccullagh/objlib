@@ -13,7 +13,7 @@ struct _como_object {
 };
 
 struct _como_type {
-  const char *name;
+  const char *obj_name;
   void(*obj_print)(como_object *);
   void(*obj_dtor)(como_object *);
   int(*obj_equals)(como_object *, como_object *);
@@ -25,7 +25,7 @@ struct _como_type {
   (((como_object *)(ob))->type == &tp)
 
 #define como_type_name(o) \
-  (((como_object *)(o))->type->name)
+  (((como_object *)(o))->type->obj_name)
 
 #define como_object_print(o) \
   (((como_object *)(o))->type->obj_print((como_object *)(o)))

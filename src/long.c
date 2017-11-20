@@ -52,11 +52,11 @@ static como_size_t long_hash(como_object *obj)
 }
 
 como_type como_long_type = {
-  "long",
-  long_print,
-  long_dtor,
-  long_equals,
-  long_hash,
-  NULL
+  .obj_name   = "long",
+  .obj_print  = long_print,
+  .obj_dtor   = long_dtor, 
+  .obj_equals = long_equals,
+  .obj_hash   = long_hash,
+  .obj_str    = NULL
 };
 
