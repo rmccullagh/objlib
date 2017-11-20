@@ -24,6 +24,7 @@ COMO_OBJECT_API como_object *como_map_delete(como_object *obj,
   como_object *key);
 
 #define como_map_size(o) (((como_map *)(o))->size)
+#define como_map_capacity(o) (((como_map *)(o))->capacity)
 
 extern como_type como_map_type;
 
