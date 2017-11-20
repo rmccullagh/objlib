@@ -29,7 +29,7 @@ static como_map_bucket *get_bucket(como_map *map, como_object *key,
   /* Check to see if this key already exists */
   while(bucket != NULL) {
     como_map_bucket *next = bucket->next;
-    como_object *thiskey   = bucket->key;
+    como_object *thiskey  = bucket->key;
 
     if(thiskey->type->obj_equals(thiskey, key)) {
       retval = bucket;
@@ -65,8 +65,29 @@ COMO_OBJECT_API como_object *como_map_new(como_size_t size)
 
 static void do_resize(como_map *map)
 {
-  /* FUCK */
-  (void)map;
+  como_size_t newcap = map->capacity * 2;
+  como_map_bucket **newbuckets = malloc(sizeof(como_map_bucket *) * newcap);
+  como_size_t i;
+  
+
+  for(i = 0; i < newcap; i++)
+    newbuckets[i] = NULL;
+  
+  for(i = 0; i < map->capacity; i++) 
+  {
+    como_map_bucket *b = map->buckets[i];
+
+    if(b)
+    {
+      como_size_t newidx = b->key->type->obj_hash(b->key) % newcap;
+      newbuckets[newidx] = b;
+    }
+
+  }
+
+  free(map->buckets);
+  map->buckets  = newbuckets;
+  map->capacity = newcap;
 }
 
 COMO_OBJECT_API como_object *como_map_put(como_object *obj, 
@@ -163,7 +184,7 @@ static void map_dtor(como_object *ob)
   for(i = 0; i < map->capacity; i++) {
     como_map_bucket *bucket = map->buckets[i];
 
-    if(bucket) 
+    if(bucket)
       while(bucket != NULL) {
         como_map_bucket *next = bucket->next;
         /* we don't free keys, or values, */
