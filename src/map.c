@@ -68,7 +68,6 @@ static void do_resize(como_map *map)
   como_size_t newcap = map->capacity * 2;
   como_map_bucket **newbuckets = malloc(sizeof(como_map_bucket *) * newcap);
   como_size_t i;
-  
 
   for(i = 0; i < newcap; i++)
     newbuckets[i] = NULL;
