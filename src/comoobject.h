@@ -6,6 +6,7 @@
 typedef struct _como_type   como_type;
 typedef struct _como_object como_object;
 typedef struct _como_binary_ops como_binary_ops;
+typedef struct _como_container_ops como_container_ops;
 typedef long como_size_t;
 
 struct _como_object {
@@ -21,6 +22,11 @@ struct _como_binary_ops {
   como_object *(*obj_mul)(como_object *, como_object *);
   como_object *(*obj_div)(como_object *, como_object *);
   como_object *(*obj_sub)(como_object *, como_object *);
+};
+
+struct _como_container_ops {
+  como_object *(*get)(como_object *, como_object *);
+  como_object *(*set)(como_object *, como_object *);
 };
 
 struct _como_type {
