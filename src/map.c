@@ -18,6 +18,33 @@
     do_resize(map); \
 } while(0)
 
+static como_map_bucket *get_bucket(como_map *map, como_object *key, 
+  como_size_t *idx)
+{
+  como_size_t hashed = key->type->obj_hash(key);
+  como_size_t index  = hashed % map->capacity;
+  como_map_bucket *bucket = map->buckets[index];
+  como_map_bucket *retval = NULL;
+
+  /* Check to see if this key already exists */
+  while(bucket != NULL) {
+    como_map_bucket *next = bucket->next;
+    como_object *thiskey   = bucket->key;
+
+    if(thiskey->type->obj_equals(thiskey, key)) {
+      retval = bucket;
+      break;
+    }
+
+    bucket = next;
+  }
+
+  if(idx)
+    *idx = index;
+
+  return retval;
+}
+
 COMO_OBJECT_API como_object *como_map_new(como_size_t size)
 {
   como_map *map = malloc(sizeof(*map));
@@ -54,30 +81,21 @@ COMO_OBJECT_API como_object *como_map_put(como_object *obj,
 
   maybe_resize(obj);
 
-  como_map *map      = (como_map *)obj;
-  como_size_t hashed = key->type->obj_hash(key);
-  como_size_t index  = hashed % map->capacity;
-  como_map_bucket *bucket = map->buckets[index];
+  como_size_t idx;
+  como_map *map = (como_map *)obj;
+  como_map_bucket *bucket = get_bucket(map, key, &idx);
 
-  /* Check to see if this key already exists */
-  while(bucket != NULL) {
-    como_map_bucket *next = bucket->next;
-    como_object *thiskey   = bucket->key;
-
-    if(thiskey->type->obj_equals(thiskey, key)) {
-      bucket->value = value;
-      goto done;
-    }
-
-    bucket = next;
+  if(bucket) {
+    bucket->value = value;
+    goto done;
   }
 
   bucket = malloc(sizeof(*bucket));
   bucket->key = key;
   bucket->value = value;
-  bucket->next = map->buckets[index];
+  bucket->next = map->buckets[idx];
 
-  map->buckets[index] = bucket;
+  map->buckets[idx] = bucket;
   map->size++;
 
 done:
@@ -91,21 +109,10 @@ COMO_OBJECT_API como_object *como_map_get(como_object *obj, como_object *key)
   if(!key_type_valid(key))
     return NULL;
 
-  como_size_t hashed = key->type->obj_hash(key);
-  como_size_t index  = hashed % map->capacity;
-  como_map_bucket *bucket = map->buckets[index];
+  como_map_bucket *bucket = get_bucket(map, key, NULL);
 
-  /* Check to see if this key already exists */
-  while(bucket != NULL) {
-    como_map_bucket *next = bucket->next;
-    como_object *thiskey   = bucket->key;
-
-    if(thiskey->type->obj_equals(thiskey, key)) {
-        return bucket->value;
-    }
-
-    bucket = next;
-  }
+  if(bucket)
+    return bucket->value;
 
   return NULL;
 }
@@ -144,7 +151,6 @@ COMO_OBJECT_API como_object *como_map_delete(como_object *obj, como_object *key)
     bucket = next;
     prev = bucket;
   }
-
 
   return NULL;
 }
