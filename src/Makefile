@@ -4,7 +4,7 @@ COMO_OBJECT_LIB_LD_FLAGS= -shared
 CFLAGS := -fPIC -I../ -Wall -Wextra -g -ggdb -std=c99
 LDFLAGS = -fPIC -shared
 BINDIR = $(shell pwd)/../bin
-COMO_OBJECT_LIB_SOURCES =string.c long.c double.c map.c code.c
+COMO_OBJECT_LIB_SOURCES =container.c string.c long.c double.c map.c code.c array.c
 COMO_OBJECT_LIB_OBJECTS =$(COMO_OBJECT_LIB_SOURCES:.c=.o)
 
 OBJECTS= $(SOURCES:%.cpp=$(OBJ_DIR)/%.o)
