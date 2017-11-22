@@ -7,7 +7,7 @@
 COMO_OBJECT_API como_object *como_array_new(como_size_t size)
 {
   como_array *ar = malloc(sizeof(*ar));
-  
+
   /* call the "base" constructor */
   como_container_init((como_object *)&ar->base, sizeof(como_object *), size, 
       (void ***)&ar->items); 
@@ -30,7 +30,6 @@ COMO_OBJECT_API como_object *como_array_push(como_object *xself,
 COMO_OBJECT_API como_object *como_array_get(como_object *xself,
     como_object *index)
 {
-
   if(!como_type_is(index, como_long_type))
     return NULL;
 
