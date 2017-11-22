@@ -9,6 +9,8 @@ COMO_OBJECT_API void como_container_init(como_object *obj,
 {
   /* Initialize the parent */
   obj->type = &como_container_type;
+  obj->flags = 0;
+  obj->next = NULL;
  
   /* Initialize self */ 
   como_container *self = como_get_container(obj);
