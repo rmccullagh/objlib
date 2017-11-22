@@ -5,6 +5,17 @@
 
 #include <como.h>
 
+static unsigned long hash(unsigned char *str)
+{
+  unsigned long hash = 5381;
+  int c;
+
+  while((c = *str++))
+    hash = ((hash << 5) + hash) + c;
+
+  return hash;
+}
+
 COMO_OBJECT_API como_object *como_stringfromstring(char *val)
 {
   como_string *obj = malloc(sizeof(*obj));
@@ -13,6 +24,7 @@ COMO_OBJECT_API como_object *como_stringfromstring(char *val)
   obj->base.type = &como_string_type;
   obj->base.next = NULL;
   obj->len = (como_size_t)len;
+  obj->hash = (como_size_t)hash((unsigned char*)val);
   obj->value = malloc(len + 1);
   memcpy(obj->value, val, len + 1);
 
@@ -52,9 +64,9 @@ static int string_equals(como_object *a, como_object *b)
 
 static como_size_t string_hash(como_object *obj)
 {
-  como_string *left  = (como_string *)obj;
-
-  return left->len;
+  como_string *self  = (como_string *)obj;
+  
+  return self->hash;
 }
 
 como_type como_string_type = {
