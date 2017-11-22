@@ -3,11 +3,11 @@
 
 #include <como.h>
 
-COMO_OBJECT_API como_object *como_code_new(void)
+COMO_OBJECT_API como_object *como_code_new(como_size_t cap)
 {
   como_code *co = malloc(sizeof(*co));
 
-  como_container_init((como_object *)&co->base, sizeof(como_uint32_t *), 8,
+  como_container_init((como_object *)&co->base, sizeof(como_uint32_t *), cap,
     (void ***)&co->code);
 
   co->base.type = &como_code_type;

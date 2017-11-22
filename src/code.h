@@ -11,7 +11,7 @@ typedef struct _como_code
   como_uint32_t **code;
 } como_code;
 
-COMO_OBJECT_API como_object  *como_code_new();
+COMO_OBJECT_API como_object  *como_code_new(como_size_t cap);
 COMO_OBJECT_API como_object  *como_code_push(como_object *, como_uint32_t);
 COMO_OBJECT_API como_uint32_t como_code_get(como_object *, como_size_t);
 
