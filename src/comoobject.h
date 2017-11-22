@@ -7,6 +7,7 @@ typedef struct _como_binary_ops como_binary_ops;
 typedef long como_size_t;
 
 struct _como_object {
+  como_usize_t flags;
   struct _como_type   *type;
   struct _como_object *next;
 };
@@ -42,6 +43,13 @@ struct _como_type {
 
 #define como_object_dtor(o) \
   (((como_object *)(o))->type->obj_dtor((como_object *)(o)))
+
+#define como_object_init(o, _type) do { \
+  como_object *obj = (como_object *)(o); \
+  obj->type = _type; \
+  obj->flags = 0; \
+  obj->next = NULL; \
+} while (0)
 
 #define COMO_OBJECT_API __attribute__((__visibility__("default")))
 
