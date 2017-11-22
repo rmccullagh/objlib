@@ -20,8 +20,8 @@ typedef struct _como_container
 } como_container;
 
 #define como_get_container(o) ((como_container *)(o))
-#define como_container_size(o) (((como_container *)(o))->size)
-#define como_container_capacity(o) (((como_container *)(o))->capacity)
+#define como_container_size(o) (como_get_container((o))->size)
+#define como_container_capacity(o) (como_get_container(o)->capacity)
 
 #define como_container_should_resize(self, items) do { \
   if(como_container_size(self) >= como_container_capacity(self)) { \
