@@ -46,11 +46,11 @@ static int long_equals(como_object *base, como_object *right)
   return retval;
 }
 
-static como_size_t long_hash(como_object *obj)
+static como_usize_t long_hash(como_object *obj)
 {
   como_long *lval = (como_long *)obj;
 
-  return lval->value;
+  return lval->value & 0x7fffffffffffffffL;
 }
 
 #define willoverflow(a, b) \
