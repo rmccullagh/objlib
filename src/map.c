@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
@@ -19,8 +20,8 @@
 static como_map_bucket *get_bucket(como_map *map, como_object *key, 
   como_size_t *idx)
 {
-  como_size_t hashed = key->type->obj_hash(key);
-  como_size_t index  = hashed % map->capacity;
+  como_usize_t hashed = key->type->obj_hash(key);
+  como_usize_t index  = hashed % map->capacity;
   como_map_bucket *bucket = map->buckets[index];
   como_map_bucket *retval = NULL;
 
