@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "comoobject.h"
-#include "container.h"
+
+#include <como.h>
 
 COMO_OBJECT_API void como_container_init(como_object *obj, 
     como_size_t sizeofitem,

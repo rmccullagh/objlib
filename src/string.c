@@ -3,8 +3,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "string.h"
-#include "comoobject.h"
+#include <como.h>
 
 COMO_OBJECT_API como_object *como_stringfromstring(char *val)
 {

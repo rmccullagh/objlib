@@ -1,7 +1,9 @@
 #ifndef COMO_LONG_OBJECT
 #define COMO_LONG_OBJECT
 
-#include "comoobject.h"
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include code.h directly"
+#endif
 
 typedef struct _como_long {
   como_object base;

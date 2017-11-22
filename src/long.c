@@ -5,8 +5,7 @@
 #include <stdint.h>
 #include <limits.h>
 
-#include "long.h"
-#include "double.h"
+#include <como.h>
 
 COMO_OBJECT_API como_object *como_longfromlong(long lval)
 {

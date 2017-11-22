@@ -1,7 +1,9 @@
 #ifndef COMO_MAP_OBJECT_H
 #define COMO_MAP_OBJECT_H
 
-#include "comoobject.h"
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include code.h directly"
+#endif
 
 typedef struct _como_map_bucket {
   como_object             *key;

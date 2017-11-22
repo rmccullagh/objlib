@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "system.h"
-#include "comoobject.h"
-#include "code.h"
-#include "container.h"
+#include <como.h>
 
 COMO_OBJECT_API como_object *como_code_new(void)
 {

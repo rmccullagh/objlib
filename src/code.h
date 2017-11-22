@@ -1,9 +1,9 @@
 #ifndef COMO_CODE_OBJECT_H
 #define COMO_CODE_OBJECT_H
 
-#include "comoobject.h"
-#include "container.h"
-#include "system.h"
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include code.h directly"
+#endif
 
 typedef struct _como_code 
 {

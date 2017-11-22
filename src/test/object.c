@@ -1,10 +1,6 @@
-#include "comoobject.h"
-#include "string.h"
-#include "long.h"
-#include "double.h"
-#include "map.h"
-
 #include <stdio.h>
+
+#include <como.h>
 
 int main(void)
 {

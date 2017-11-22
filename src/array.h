@@ -1,8 +1,9 @@
 #ifndef COMO_ARRAY_H
 #define COMO_ARRAY_H
 
-#include "comoobject.h"
-#include "container.h"
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include array.h directly"
+#endif
 
 /* Inheritence:
  *  como_object

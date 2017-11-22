@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include <float.h>
 
-#include "comoobject.h"
-#include "double.h"
-#include "long.h"
+#include <como.h>
 
 COMO_OBJECT_API como_object *como_doublefromdouble(double dval)
 {

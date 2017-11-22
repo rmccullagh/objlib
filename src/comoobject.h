@@ -1,8 +1,6 @@
 #ifndef COMO_OBJECT_H
 #define COMO_OBJECT_H
 
-#include <stddef.h>
-
 typedef struct _como_type   como_type;
 typedef struct _como_object como_object;
 typedef struct _como_binary_ops como_binary_ops;

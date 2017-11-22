@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "comoobject.h"
-#include "long.h"
-#include "double.h"
+#include <como.h>
 
 int main(void)
 {

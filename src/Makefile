@@ -1,7 +1,7 @@
 OS_TYPE := $(shell sh -c 'uname -s')
 COMO_OBJECT_LIB=libcomoobject.so
 COMO_OBJECT_LIB_LD_FLAGS= -shared
-CFLAGS := -fPIC -I../ -Wall -Wextra -g -ggdb -std=c99
+CFLAGS := -fPIC -I. -Wall -Wextra -g -ggdb -std=c99
 LDFLAGS = -fPIC -shared
 BINDIR = $(shell pwd)/../bin
 COMO_OBJECT_LIB_SOURCES =container.c string.c long.c double.c map.c code.c array.c

@@ -1,7 +1,9 @@
 #ifndef COMO_CONTAINER_H
 #define COMO_CONTAINER_H
 
-#include "comoobject.h"
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include container.h directly"
+#endif
 
 /* This is an "abstract class" that holds a sequence type. It isn't 
  * supposed to be a concrete class, rather a base class that handles

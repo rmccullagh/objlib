@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "comoobject.h"
-#include "long.h"
-#include "array.h"
+#include <como.h>
 
 /* For freeing */
 static como_object *root = NULL;

@@ -1,8 +1,9 @@
 #ifndef COMO_DOUBLE_OBJECT_H
 #define COMO_DOUBLE_OBJECT_H
 
-#include "comoobject.h"
-
+# if !(defined(COMO_BASE_INCLUDED))
+#   error "Please do not include double.h directly"
+#endif
 
 typedef struct _como_double {
   como_object base;

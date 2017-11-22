@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
-#include "system.h"
-#include "comoobject.h"
-#include "container.h"
-#include "code.h"
+#include <como.h>
 
 #define LOAD_CONST                      0x01
 #define STORE_NAME                      0x02

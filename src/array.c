@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "array.h"
-#include "container.h"
+#include <como.h>
 
 COMO_OBJECT_API como_object *como_array_new(como_size_t size)
 {

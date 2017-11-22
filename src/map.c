@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include <float.h>
 
-#include "map.h"
-#include "string.h"
-#include "long.h"
+#include <como.h>
 
 #define key_type_valid(key) \
   !((!como_type_is(key, como_string_type) \
