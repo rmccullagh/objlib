@@ -8,7 +8,7 @@
 typedef struct _como_string {
   como_object base;
   como_size_t len;
-  como_size_t hash;
+  como_usize_t hash;
   char *value;
 } como_string;
 

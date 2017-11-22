@@ -21,10 +21,16 @@ COMO_OBJECT_API como_object *como_stringfromstring(char *val)
   como_string *obj = malloc(sizeof(*obj));
   size_t len = strlen(val);
 
+  /* TODO check if len overflows */
+
   obj->base.type = &como_string_type;
   obj->base.next = NULL;
+  
   obj->len = (como_size_t)len;
-  obj->hash = (como_size_t)hash((unsigned char*)val);
+  
+  obj->hash = hash((unsigned char*)val);
+  /* TODO check if hash value would overflow as a signed value */
+
   obj->value = malloc(len + 1);
   memcpy(obj->value, val, len + 1);
 
@@ -62,10 +68,10 @@ static int string_equals(como_object *a, como_object *b)
   return retval;
 }
 
-static como_size_t string_hash(como_object *obj)
+static como_usize_t string_hash(como_object *obj)
 {
   como_string *self  = (como_string *)obj;
-  
+
   return self->hash;
 }
 
