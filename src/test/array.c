@@ -26,7 +26,10 @@ int main(void)
 
   for(i = 0; i < max; i++)
   {
-    como_object *val = como_array_get(ar, i);
+    como_object *lval = como_longfromlong(i);
+    lval->next = root;
+    root = lval;
+    como_object *val = como_array_get(ar, lval);
     assert(val);
   }
 

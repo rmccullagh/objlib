@@ -27,9 +27,14 @@ COMO_OBJECT_API como_object *como_array_push(como_object *xself,
   return (como_object *)como_container_push(xself, value);
 }
 
-COMO_OBJECT_API como_object *como_array_get(como_object *xself, como_size_t i)
+COMO_OBJECT_API como_object *como_array_get(como_object *xself,
+    como_object *index)
 {
-  return (como_object *)como_container_get(xself, i);
+
+  if(!como_type_is(index, como_long_type))
+    return NULL;
+
+  return (como_object *)como_container_get(xself, ((como_long *)index)->value);
 }
 
 static void array_dtor(como_object *xself)
