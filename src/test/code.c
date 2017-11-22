@@ -22,7 +22,7 @@
 
 int main(void)
 {
-  como_object *code = como_code_new();
+  como_object *code = como_code_new(4);
   como_size_t i;
 
   como_code_push(code, PACK_INSTRUCTION(LOAD_CONST, 0, 0));
