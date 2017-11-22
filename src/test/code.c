@@ -36,6 +36,10 @@ int main(void)
   como_code_push(code, PACK_INSTRUCTION(LOAD_CONST, 0, 0));
   como_code_push(code, PACK_INSTRUCTION(LOAD_CONST, 1, 0));
   como_code_push(code, PACK_INSTRUCTION(IADD,       0, 0));
+  
+  como_code_push(code, PACK_INSTRUCTION(LOAD_CONST, 0, 0));
+  como_code_push(code, PACK_INSTRUCTION(LOAD_CONST, 1, 0));
+  como_code_push(code, PACK_INSTRUCTION(IADD,       0, 0));
 
   for(i = 0; i < como_container_size(code); i++) {
     como_uint32_t opline = como_code_get(code, i);
