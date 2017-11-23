@@ -88,11 +88,181 @@ static como_object *long_add(como_object *xself, como_object *b)
   return retval;
 }
 
+static como_object *long_mul(como_object *xself, como_object *b)
+{
+  como_long *self = como_get_long(xself);
+  como_object *retval = NULL;
+
+  if(como_type_is(b, como_long_type))
+  {
+    long right = ((como_long *)b)->value;
+
+    if(0 /*willoverflow */)
+    {
+      retval = como_longfromlong(-1L);
+    }
+    else
+    {
+      retval = como_longfromlong(self->value * right);
+    }
+  }
+  else 
+  { 
+    if(como_type_is(b, como_double_type))
+    {
+      double left = (double)self->value;
+      double right = ((como_double *)b)->value;
+    
+      retval = como_doublefromdouble(left * right);
+    }
+  }
+
+  return retval;
+}
+
+static como_object *long_div(como_object *xself, como_object *b)
+{
+  como_long *self = como_get_long(xself);
+  como_object *retval = NULL;
+
+  if(como_type_is(b, como_long_type))
+  {
+    long right = ((como_long *)b)->value;
+
+    if(0 /*willoverflow */)
+    {
+      retval = como_longfromlong(-1L);
+    }
+    else
+    {
+      /* TODO divide by zero and overflow */
+      retval = como_longfromlong(self->value / right);
+    }
+  }
+  else 
+  { 
+    if(como_type_is(b, como_double_type))
+    {
+      double left = (double)self->value;
+      double right = ((como_double *)b)->value;
+    
+      retval = como_doublefromdouble(left / right);
+    }
+  }
+
+  return retval;
+}
+
+static como_object *long_sub(como_object *xself, como_object *b)
+{
+  como_long *self = como_get_long(xself);
+  como_object *retval = NULL;
+
+  if(como_type_is(b, como_long_type))
+  {
+    long right = ((como_long *)b)->value;
+
+    if(0 /*willoverflow */)
+    {
+      retval = como_longfromlong(-1L);
+    }
+    else
+    {
+      /* TODO divide by zero and overflow */
+      retval = como_longfromlong(self->value - right);
+    }
+  }
+  else 
+  { 
+    if(como_type_is(b, como_double_type))
+    {
+      double left = (double)self->value;
+      double right = ((como_double *)b)->value;
+    
+      retval = como_doublefromdouble(left - right);
+    }
+  }
+
+  return retval;
+}
+
+static como_object *long_rem(como_object *xself, como_object *x)
+{
+  como_long *self = como_get_long(xself);
+  como_object *retval = NULL;
+  
+  if(como_type_is(x, como_double_type)) 
+  {
+    double dividend = (double)self->value;
+    double divisor = ((como_double *)x)->value;
+    
+    retval = como_doublefromdouble(
+      dividend - (divisor * ((int)dividend/(int)divisor))
+    );
+  } 
+  else if(como_type_is(x, como_long_type))
+  {
+    double dividend = (double)self->value;
+    double divisor = (double)(((como_long *)x)->value);
+
+    /* 269.86 % 100 = 269.86 - (100 * int(269.86/100)) */
+    /* http://www2.nkfust.edu.tw/~mhchen/papers/Psychologica\
+     * l%20Barriers%20Effects%20on%20Futures%20Markets/mod.pdf */
+    retval = como_doublefromdouble(
+        dividend - (divisor * ((int)dividend/(int)divisor))
+    );
+  } 
+
+  return retval;
+}
+
+static como_object *long_plus(como_object *obj)
+{
+  como_long *self = como_get_long(obj);
+
+  return como_longfromlong(+self->value); 
+}
+
+static como_object *long_minus(como_object *obj)
+{
+  como_long *self = como_get_long(obj);
+
+  return como_longfromlong(-self->value); 
+}
+
+static como_object *long_string(como_object *obj)
+{
+  como_long *self = como_get_long(obj);
+  char *buffer = NULL;
+  int size = 0;
+  size =  snprintf(buffer, size, "%ld", self->value);
+
+  size++;
+
+  buffer = malloc(size);
+
+  snprintf(buffer, size, "%ld", self->value);
+
+  buffer[size - 1] = '\0';
+
+  como_object *retval = como_stringfromstring(buffer);
+  
+  free(buffer);
+
+  return retval;
+}
+
 static como_binary_ops binops = {
   .obj_add = long_add,
-  .obj_mul = NULL,
-  .obj_div = NULL,
-  .obj_sub = NULL
+  .obj_mul = long_mul,
+  .obj_div = long_div,
+  .obj_sub = long_sub,
+  .obj_rem = long_rem
+};
+
+static como_unary_ops unops = { 
+  .obj_plus  = long_plus,
+  .obj_minus = long_minus
 };
 
 como_type como_long_type = {
@@ -101,7 +271,8 @@ como_type como_long_type = {
   .obj_dtor   = long_dtor, 
   .obj_equals = long_equals,
   .obj_hash   = long_hash,
-  .obj_str    = NULL,
-  .obj_binops = &binops
+  .obj_str    = long_string,
+  .obj_binops = &binops,
+  .obj_unops  = &unops
 };
 
