@@ -8,6 +8,9 @@
  */
 #define COMO_BASE_INCLUDED 1
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "system.h"
 #include "comoobject.h"
 #include "container.h"
