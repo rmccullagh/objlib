@@ -12,6 +12,8 @@ typedef struct _como_double {
 
 extern como_type como_double_type;
 
+#define como_get_double(o) ((como_double *)(o))
+
 COMO_OBJECT_API como_object *como_doublefromdouble(double dval);
 
 #endif
