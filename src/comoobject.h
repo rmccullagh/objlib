@@ -4,6 +4,8 @@
 typedef struct _como_type   como_type;
 typedef struct _como_object como_object;
 typedef struct _como_binary_ops como_binary_ops;
+typedef struct _como_unary_ops como_unary_ops;
+
 typedef long como_size_t;
 
 struct _como_object {
@@ -20,6 +22,12 @@ struct _como_binary_ops {
   como_object *(*obj_mul)(como_object *, como_object *);
   como_object *(*obj_div)(como_object *, como_object *);
   como_object *(*obj_sub)(como_object *, como_object *);
+  como_object *(*obj_rem)(como_object *, como_object *);
+};
+
+struct _como_unary_ops {
+  como_object *(*obj_plus)(como_object *);
+  como_object *(*obj_minus)(como_object *);
 };
 
 struct _como_type {
@@ -30,6 +38,7 @@ struct _como_type {
   como_usize_t(*obj_hash)(como_object *);
   como_object *(*obj_str)(como_object *);
   struct _como_binary_ops *obj_binops;
+  struct _como_unary_ops  *obj_unops;
 };
 
 #define como_type_is(ob, tp) \
