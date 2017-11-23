@@ -13,6 +13,7 @@
 
 #include "system.h"
 #include "comoobject.h"
+#include "comobool.h"
 #include "container.h"
 #include "array.h"
 #include "map.h"

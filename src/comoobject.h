@@ -1,10 +1,13 @@
 #ifndef COMO_OBJECT_H
 #define COMO_OBJECT_H
 
+/* We're modeling the object system with all of C's operators */
 typedef struct _como_type   como_type;
 typedef struct _como_object como_object;
 typedef struct _como_binary_ops como_binary_ops;
 typedef struct _como_unary_ops como_unary_ops;
+typedef struct _como_comparison_ops como_comparison_ops;
+typedef struct _como_logical_ops como_logical_ops;  
 
 typedef long como_size_t;
 
@@ -30,6 +33,24 @@ struct _como_unary_ops {
   como_object *(*obj_minus)(como_object *);
 };
 
+/* Technically, we can do this with 2 operations, 
+   but let's just make it easy for now 
+*/
+struct _como_comparison_ops {
+  como_object *(*obj_eq)(como_object *, como_object *);
+  como_object *(*obj_neq)(como_object *, como_object *);
+  como_object *(*obj_gt)(como_object *, como_object *);
+  como_object *(*obj_lt)(como_object *, como_object *);
+  como_object *(*obj_gte)(como_object *, como_object *);
+  como_object *(*obj_lte)(como_object *, como_object *);
+};
+
+struct _como_logical_ops {
+  como_object *(*obj_not)(como_object *);
+  como_object *(*obj_and)(como_object *, como_object *);
+  como_object *(*obj_or)(como_object *, como_object *);
+};
+
 struct _como_type {
   const char *obj_name;
   void(*obj_print)(como_object *);
@@ -37,8 +58,9 @@ struct _como_type {
   int(*obj_equals)(como_object *, como_object *);
   como_usize_t(*obj_hash)(como_object *);
   como_object *(*obj_str)(como_object *);
-  struct _como_binary_ops *obj_binops;
-  struct _como_unary_ops  *obj_unops;
+  struct _como_binary_ops      *obj_binops;
+  struct _como_unary_ops       *obj_unops;
+  struct _como_comparison_ops  *obj_compops;
 };
 
 #define como_type_is(ob, tp) \
