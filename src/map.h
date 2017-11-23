@@ -2,7 +2,7 @@
 #define COMO_MAP_OBJECT_H
 
 # if !(defined(COMO_BASE_INCLUDED))
-#   error "Please do not include code.h directly"
+#   error "Please do not include map.h directly"
 #endif
 
 typedef struct _como_map_bucket {
