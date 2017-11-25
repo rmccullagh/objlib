@@ -202,7 +202,8 @@ como_type como_map_type = {
   .obj_equals = NULL,
   .obj_hash   = NULL,
   .obj_str    = NULL,
-  .obj_binops = NULL
+  .obj_binops = NULL,
+  .obj_unops  = NULL
 };
 
 

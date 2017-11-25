@@ -28,12 +28,24 @@ COMO_OBJECT_API como_object *como_array_push(como_object *xself,
 }
 
 COMO_OBJECT_API como_object *como_array_get(como_object *xself,
-    como_object *index)
+    como_size_t index)
 {
-  if(!como_type_is(index, como_long_type))
-    return NULL;
+  return (como_object *)como_container_get(xself, index);
+}
 
-  return (como_object *)como_container_get(xself, ((como_long *)index)->value);
+/* We can use this as a sparse array, this is primary used for a stack */
+COMO_OBJECT_API como_object *como_array_push_index(como_object *xself,
+  como_size_t i, 
+  como_object *value)
+{
+  if(i < 0)
+    assert(!(i < 0));
+
+  if(i >= como_container_capacity(xself))
+    assert(!(i >= como_container_capacity(xself)));
+  
+  como_get_array(xself)->items[i] = value;
+  return value;
 }
 
 static void array_dtor(como_object *xself)

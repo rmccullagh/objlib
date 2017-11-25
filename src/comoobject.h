@@ -7,7 +7,9 @@ typedef struct _como_object como_object;
 typedef struct _como_binary_ops como_binary_ops;
 typedef struct _como_unary_ops como_unary_ops;
 typedef struct _como_comparison_ops como_comparison_ops;
-typedef struct _como_logical_ops como_logical_ops;  
+typedef struct _como_logical_ops como_logical_ops;
+
+extern como_logical_ops ComoLogicalOps;
 
 typedef long como_size_t;
 

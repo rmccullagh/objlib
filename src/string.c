@@ -82,7 +82,8 @@ como_type como_string_type = {
   .obj_equals = string_equals,
   .obj_hash   = string_hash,
   .obj_str    = NULL,
-  .obj_binops = NULL
+  .obj_binops = NULL,
+  .obj_unops  = NULL
 };
 
 

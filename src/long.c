@@ -13,6 +13,7 @@ COMO_OBJECT_API como_object *como_longfromlong(long lval)
 
   obj->base.type = &como_long_type;
   obj->base.next = NULL;  
+  obj->base.flags = 0;
   obj->value = lval;
 
   return (como_object *)obj;
@@ -265,14 +266,92 @@ static como_unary_ops unops = {
   .obj_minus = long_minus
 };
 
+static como_object *long_equals_wrap(como_object *a, como_object *b)
+{
+  return como_boolfromint(long_equals(a, b));
+}
+
+static como_object *long_neq(como_object *a, como_object *b)
+{
+  return como_boolfromint(!long_equals(a, b));
+}
+
+static como_object *long_gt(como_object *a, como_object *b)
+{
+  como_long *self = como_get_long(a);
+
+  if(como_type_is(b, como_long_type))
+    return como_false;
+  else
+    return como_boolfromint(self->value > ((como_long *)b)->value);
+}
+
+static como_object *long_lt(como_object *a, como_object *b)
+{
+  como_long *self = como_get_long(a);
+
+  if(como_type_is(b, como_long_type))
+    return como_false;
+  else
+    return como_boolfromint(self->value < ((como_long *)b)->value);
+}
+
+static como_object *long_gte(como_object *a, como_object *b)
+{
+  como_long *self = como_get_long(a);
+
+  if(como_type_is(b, como_long_type))
+    return como_false;
+  else
+  {
+    como_long *right = (como_long *)b;
+
+    if(self->value > right->value)
+      return como_true;
+    else if(self->value == right->value)
+      return como_true;
+    else
+      return como_false;
+  }
+}
+
+static como_object *long_lte(como_object *a, como_object *b)
+{
+  como_long *self = como_get_long(a);
+
+  if(como_type_is(b, como_long_type))
+    return como_false;
+  else
+  {
+    como_long *right = (como_long *)b;
+
+    if(self->value < right->value)
+      return como_true;
+    else if(self->value == right->value)
+      return como_true;
+    else
+      return como_false;
+  }
+}
+
+static como_comparison_ops compops = {
+  .obj_eq  = long_equals_wrap,
+  .obj_neq = long_neq,
+  .obj_gt  = long_gt,
+  .obj_lt  = long_lt,
+  .obj_gte = long_gte,
+  .obj_lte = long_lte
+};
+
 como_type como_long_type = {
-  .obj_name   = "long",
-  .obj_print  = long_print,
-  .obj_dtor   = long_dtor, 
-  .obj_equals = long_equals,
-  .obj_hash   = long_hash,
-  .obj_str    = long_string,
-  .obj_binops = &binops,
-  .obj_unops  = &unops
+  .obj_name    = "long",
+  .obj_print   = long_print,
+  .obj_dtor    = long_dtor, 
+  .obj_equals  = long_equals,
+  .obj_hash    = long_hash,
+  .obj_str     = long_string,
+  .obj_binops  = &binops,
+  .obj_unops   = &unops,
+  .obj_compops = &compops
 };
 

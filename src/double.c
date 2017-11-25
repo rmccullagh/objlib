@@ -22,7 +22,7 @@ static void double_print(como_object *ob)
   como_double *dval = (como_double *)ob;
 
   /* check out DBL_DECIMAL_DIG */
-  printf("%.17g\n",  dval->value);
+  printf("%.17g",  dval->value);
 }
 
 static como_object *double_string(como_object *obj)
@@ -185,13 +185,23 @@ static como_unary_ops unops = {
   .obj_minus = double_minus
 };
 
+static como_comparison_ops compops = {
+  .obj_eq  = NULL,
+  .obj_neq = NULL,
+  .obj_gt  = NULL,
+  .obj_lt  = NULL,
+  .obj_gte = NULL,
+  .obj_lte = NULL
+};
+
 como_type como_double_type = {
-  .obj_name   = "double",
-  .obj_print  = double_print,
-  .obj_dtor   = double_dtor,
-  .obj_equals = double_equals,
-  .obj_hash   = NULL,
-  .obj_str    = double_string,
-  .obj_binops = &binops,
-  .obj_unops  = &unops
+  .obj_name    = "double",
+  .obj_print   = double_print,
+  .obj_dtor    = double_dtor,
+  .obj_equals  = double_equals,
+  .obj_hash    = NULL,
+  .obj_str     = double_string,
+  .obj_binops  = &binops,
+  .obj_unops   = &unops,
+  .obj_compops = &compops
 };

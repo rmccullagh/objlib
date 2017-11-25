@@ -21,5 +21,6 @@
 #include "double.h"
 #include "comostring.h"
 #include "code.h"
+#include "logicalops.h"
 
 #endif

@@ -18,7 +18,8 @@ typedef struct _como_array
 
 COMO_OBJECT_API como_object *como_array_new(como_size_t);
 COMO_OBJECT_API como_object *como_array_push(como_object *, como_object *);
-COMO_OBJECT_API como_object *como_array_get(como_object *, como_object *);
+COMO_OBJECT_API como_object *como_array_push_index(como_object *, como_size_t i, como_object *);
+COMO_OBJECT_API como_object *como_array_get(como_object *, como_size_t i);
 
 #define como_get_array(o) ((como_array *)((o)))
 
