@@ -75,11 +75,17 @@ static como_usize_t string_hash(como_object *obj)
   return self->hash;
 }
 
+static int string_bool(como_object *x)
+{
+  return ((como_string *)x)->len != 0;
+}
+
 como_type como_string_type = {
   .obj_name   = "string",
   .obj_print  = string_print,
   .obj_dtor   = string_dtor,
   .obj_equals = string_equals,
+  .obj_bool   = string_bool,
   .obj_hash   = string_hash,
   .obj_str    = NULL,
   .obj_binops = NULL,
