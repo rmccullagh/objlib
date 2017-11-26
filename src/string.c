@@ -41,7 +41,7 @@ static void string_print(como_object *ob)
 {
   como_string *str = (como_string *)ob;
 
-  printf("%s\n", str->value);
+  printf("%s", str->value);
 }
 
 static void string_dtor(como_object *ob)

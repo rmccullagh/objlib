@@ -103,6 +103,11 @@ static como_object *bool_lte(como_object *obj, como_object *x)
   return como_false;
 }
   
+static int bool_bool(como_object *x)
+{
+  return ((como_bool *)x)->value != 0;
+}
+
 static como_comparison_ops compops = {
   .obj_eq  = bool_equals_wrap,
   .obj_neq = bool_neq,
@@ -117,6 +122,7 @@ como_type como_bool_type = {
   .obj_print   = bool_print,
   .obj_dtor    = bool_dtor,
   .obj_equals  = bool_equals,
+  .obj_bool    = bool_bool,
   .obj_hash    = NULL,
   .obj_str     = bool_string,
   .obj_binops  = NULL,

@@ -334,6 +334,11 @@ static como_object *long_lte(como_object *a, como_object *b)
   }
 }
 
+static int long_bool(como_object *x)
+{
+  return ((como_long *)x)->value != 0L;
+}
+
 static como_comparison_ops compops = {
   .obj_eq  = long_equals_wrap,
   .obj_neq = long_neq,
@@ -348,6 +353,7 @@ como_type como_long_type = {
   .obj_print   = long_print,
   .obj_dtor    = long_dtor, 
   .obj_equals  = long_equals,
+  .obj_bool    = long_bool,
   .obj_hash    = long_hash,
   .obj_str     = long_string,
   .obj_binops  = &binops,

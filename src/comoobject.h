@@ -58,6 +58,7 @@ struct _como_type {
   void(*obj_print)(como_object *);
   void(*obj_dtor)(como_object *);
   int(*obj_equals)(como_object *, como_object *);
+  int(*obj_bool)(como_object *);
   como_usize_t(*obj_hash)(como_object *);
   como_object *(*obj_str)(como_object *);
   struct _como_binary_ops      *obj_binops;
