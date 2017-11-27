@@ -172,6 +172,11 @@ static como_object *double_minus(como_object *obj)
   return como_doublefromdouble(-self->value); 
 }
 
+static int double_bool(como_object *obj)
+{
+  return ((como_double *)obj)->value != 0.0;
+}
+
 static como_binary_ops binops = {
   .obj_add = double_add,
   .obj_mul = double_mul,
@@ -199,6 +204,7 @@ como_type como_double_type = {
   .obj_print   = double_print,
   .obj_dtor    = double_dtor,
   .obj_equals  = double_equals,
+  .obj_bool    = double_bool,
   .obj_hash    = NULL,
   .obj_str     = double_string,
   .obj_binops  = &binops,
