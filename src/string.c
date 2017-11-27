@@ -80,6 +80,41 @@ static int string_bool(como_object *x)
   return ((como_string *)x)->len != 0;
 }
 
+static como_object *string_string(como_object *x)
+{
+  return x;
+}
+
+static como_object *string_add(como_object *a, como_object *b)
+{
+  if(!como_type_is(b, como_string_type))
+    return NULL;
+
+  como_string *s1 = ((como_string *)a);
+  como_string *s2 = ((como_string *)b);
+  size_t len = s1->len + s2->len + 1;
+  /* TODO, overflow checking */
+  char *buf = malloc(len);
+  como_object *ret;
+
+  memcpy(buf, s1->value, s1->len);
+  memcpy(buf + s1->len, s2->value, s2->len);
+
+  buf[len-1] = '\0';
+  ret = como_stringfromstring(buf);
+  free(buf);
+
+  return ret;
+}
+
+static como_binary_ops binops = {
+  .obj_add = string_add,
+  .obj_mul = NULL,
+  .obj_div = NULL,
+  .obj_sub = NULL,
+  .obj_rem = NULL
+};
+
 como_type como_string_type = {
   .obj_name   = "string",
   .obj_print  = string_print,
@@ -87,8 +122,8 @@ como_type como_string_type = {
   .obj_equals = string_equals,
   .obj_bool   = string_bool,
   .obj_hash   = string_hash,
-  .obj_str    = NULL,
-  .obj_binops = NULL,
+  .obj_str    = string_string,
+  .obj_binops = &binops,
   .obj_unops  = NULL
 };
 
