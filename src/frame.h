@@ -8,6 +8,7 @@
 typedef struct _como_frame 
 {
   como_object base;
+  como_size_t ready;
   como_object *name; 
   como_object *code;
   como_object *constants;

@@ -14,7 +14,7 @@ extern como_logical_ops ComoLogicalOps;
 typedef long como_size_t;
 
 struct _como_object {
-  como_usize_t flags;
+  como_size_t flags;
   struct _como_type   *type;
   struct _como_object *next;
 };

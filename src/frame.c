@@ -8,6 +8,7 @@ COMO_OBJECT_API como_object *como_frame_new(char *name,
 
   obj->base.type = &como_frame_type;
   obj->base.next = NULL;  
+  obj->base.flags = 1;
 
   obj->name      = como_stringfromstring(name);
   obj->code      = como_code_new(COMO_CODE_SIZE);
@@ -22,6 +23,7 @@ COMO_OBJECT_API como_object *como_frame_new(char *name,
   obj->nobjslt   = 0;
   obj->mxobjs    = COMO_FRAME_MAX_OBJECTS;
   obj->parent    = callingframe;
+  obj->ready     = 0;
 
   for(i = 0; i < obj->sz; i++)
     obj->stack[i] = NULL;
@@ -46,7 +48,7 @@ static void frame_init(como_object *obj)
 
   self->locals    = como_map_new(COMO_FRAME_LOCALS_SIZE);
   self->pc = 0;
-  self->sp = 0;
+  self->ready = 1;
 }
 
 static void frame_deinit(como_object *obj)
@@ -69,6 +71,8 @@ static void frame_deinit(como_object *obj)
     }
   }
 
+  self->pc = 0;
+  self->ready = 0;
   como_object_dtor(self->locals);
 }
 
