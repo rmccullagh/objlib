@@ -49,6 +49,23 @@ static void test_collisions(void)
     como_map_put(map, s2, s2);
   }
 
+
+  como_map *map2 = (como_map *)map;
+
+  for(i = 0; i < map2->size; i++)
+  {
+    como_map_bucket *bucket = map2->buckets[i];
+
+    while(bucket) 
+    {      
+
+      como_object_print(bucket->key); printf(":"); como_object_print(bucket->value);
+      fputc('\n', stdout);
+
+      bucket = bucket->next;
+    }
+  }
+  
   while(root != NULL)
   {
     como_object *next = root->next;
@@ -86,6 +103,22 @@ int main(void)
 
     como_object *val = como_map_get(map, lval);
     assert(val);
+  }
+
+  como_map *map2 = (como_map *)map;
+
+  for(i = 0; i < map2->size; i++)
+  {
+    como_map_bucket *bucket = map2->buckets[i];
+
+    while(bucket) 
+    {      
+
+      como_object_print(bucket->key); printf(":"); como_object_print(bucket->value);
+      fputc('\n', stdout);
+
+      bucket = bucket->next;
+    }
   }
 
   while(root != NULL) 

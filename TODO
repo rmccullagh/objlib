@@ -15,21 +15,7 @@ malloc:
 
 core:
 	- implement to_string for all object types
-	- implement array
-        - map:
-            get_bucket
-		- default size of 8
-	- implement map
-		- default size of 8
-		- with a como_object as keys allowing only strings or numbers
-		- value can be any como_object
-		- determine best hashing algorithm
-		string:
-			- add a hash value to the como_string struct
-	- define a universal size to use for all lengths. ssize_t 
 	- overflow checking
-	- equals method on objects
-	- consolodation of all include files. one global como.h include file that has all objects
 	- implement mutable bytearray
 	-map:
 			implement tostring on map with a full representation of the map objects

@@ -25,6 +25,7 @@ COMO_OBJECT_API como_object *como_stringfromstring(char *val)
 
   obj->base.type = &como_string_type;
   obj->base.next = NULL;
+  obj->base.flags = 0;
   
   obj->len = (como_size_t)len;
   
@@ -82,7 +83,7 @@ static int string_bool(como_object *x)
 
 static como_object *string_string(como_object *x)
 {
-  return x;
+  return como_stringfromstring(((como_string *)x)->value);
 }
 
 static como_object *string_add(como_object *a, como_object *b)
@@ -116,15 +117,18 @@ static como_binary_ops binops = {
 };
 
 como_type como_string_type = {
-  .obj_name   = "string",
-  .obj_print  = string_print,
-  .obj_dtor   = string_dtor,
-  .obj_equals = string_equals,
-  .obj_bool   = string_bool,
-  .obj_hash   = string_hash,
-  .obj_str    = string_string,
-  .obj_binops = &binops,
-  .obj_unops  = NULL
+  .obj_name    = "string",
+  .obj_print   = string_print,
+  .obj_dtor    = string_dtor,
+  .obj_equals  = string_equals,
+  .obj_bool    = string_bool,
+  .obj_hash    = string_hash,
+  .obj_str     = string_string,
+  .obj_init    = NULL,
+  .obj_deinit  = NULL,
+  .obj_binops  = &binops,
+  .obj_unops   = NULL,
+  .obj_compops = NULL
 };
 
 

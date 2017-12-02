@@ -35,11 +35,16 @@ static void code_dtor(como_object *xself)
 }
 
 como_type como_code_type = {
-  .obj_name   = "code",
-  .obj_print  = NULL,
-  .obj_dtor   = code_dtor,
-  .obj_equals = NULL,
-  .obj_hash   = NULL,
-  .obj_str    = NULL,
-  .obj_binops = NULL
+  .obj_name    = "code",
+  .obj_print   = NULL,
+  .obj_dtor    = code_dtor,
+  .obj_equals  = NULL,
+  .obj_bool    = NULL,
+  .obj_hash    = NULL,
+  .obj_str     = NULL,
+  .obj_init    = NULL,
+  .obj_deinit  = NULL,
+  .obj_binops  = NULL,
+  .obj_unops   = NULL,
+  .obj_compops = NULL,
 };

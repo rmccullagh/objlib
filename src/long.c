@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
+#include <assert.h>
 
 #include <como.h>
 
@@ -23,7 +24,7 @@ static void long_print(como_object *ob)
 {
   como_long *lval = (como_long *)ob;
 
-  printf("%ld\n", lval->value);
+  printf("%ld", lval->value);
 }
 
 static void long_dtor(como_object *ob)
@@ -85,6 +86,8 @@ static como_object *long_add(como_object *xself, como_object *b)
       retval = como_doublefromdouble(left + right);
     }
   }
+
+  assert((void *)retval != (void *)b);
 
   return retval;
 }
@@ -356,6 +359,8 @@ como_type como_long_type = {
   .obj_bool    = long_bool,
   .obj_hash    = long_hash,
   .obj_str     = long_string,
+  .obj_init    = NULL,
+  .obj_deinit  = NULL,
   .obj_binops  = &binops,
   .obj_unops   = &unops,
   .obj_compops = &compops
