@@ -10,6 +10,7 @@ typedef struct _como_frame
   como_object base;
   como_size_t ready;
   como_object *name; 
+  como_object *params;  /* parameter names, in reverse calling order */
   como_object *code;
   como_object *constants;
   como_object *locals;

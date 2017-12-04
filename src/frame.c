@@ -11,6 +11,7 @@ COMO_OBJECT_API como_object *como_frame_new(char *name,
   obj->base.flags = 1;
 
   obj->name      = como_stringfromstring(name);
+  obj->params    = NULL;
   obj->code      = como_code_new(COMO_CODE_SIZE);
   obj->constants = como_array_new(COMO_FRAME_CONSTANTS_SIZE);
   obj->locals    = NULL,
