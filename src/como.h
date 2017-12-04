@@ -23,5 +23,5 @@
 #include "code.h"
 #include "frame.h"
 #include "logicalops.h"
-
+#include "function.h"
 #endif

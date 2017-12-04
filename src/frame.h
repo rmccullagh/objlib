@@ -2,7 +2,7 @@
 #define COMO_FRAME_H
 
 # if !(defined(COMO_BASE_INCLUDED))
-#   error "Please do not include frame.h directly"
+#   error "Please do not include class.h directly"
 #endif
 
 typedef struct _como_frame 

@@ -3,6 +3,8 @@
 
 typedef unsigned int como_uint32_t;
 typedef unsigned long como_usize_t;
+typedef int como_int;
+typedef char* como_exception;
 
 //printf("0x%" PRIXPTR "\n", (uintptr_t)your_pointer);
 // https://stackoverflow.com/questions/9053658/correct-format-specifier-to-print-pointer-address

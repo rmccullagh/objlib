@@ -73,6 +73,7 @@ static void frame_deinit(como_object *obj)
 
   self->pc = 0;
   self->ready = 0;
+  self->parent = NULL;
   como_object_dtor(self->locals);
 }
 
